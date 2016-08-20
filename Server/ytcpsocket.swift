@@ -142,7 +142,29 @@ public class TCPClient:YSocket{
 }
 
 public class TCPServer:YSocket{
-
+    
+    
+    /*gameStates :
+     -3 : unknown
+     -2 : first client joins
+     -1 : waiting for others to join
+     0 : night
+     1 : day
+    */
+    private var _gameState : Int = -3
+    
+    var gameState : Int {
+        get {
+            return _gameState
+        }
+        set {
+            _gameState = newValue
+        }
+        
+        
+    }
+    
+    
     public func listen()->(Bool,String){
         
         let fd:Int32=c_ytcpsocket_listen(self.addr, port: Int32(self.port))

@@ -11,7 +11,6 @@
 		33384CA31D5F366200A70BDF /* StyledBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33384CA21D5F366200A70BDF /* StyledBtn.swift */; };
 		33BF46611D5DE7AA0038BA0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BF46601D5DE7AA0038BA0A /* AppDelegate.swift */; };
 		33BF46631D5DE7AA0038BA0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BF46621D5DE7AA0038BA0A /* ViewController.swift */; };
-		33BF46661D5DE7AA0038BA0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BF46641D5DE7AA0038BA0A /* Main.storyboard */; };
 		33BF46681D5DE7AA0038BA0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BF46671D5DE7AA0038BA0A /* Assets.xcassets */; };
 		33BF466B1D5DE7AA0038BA0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BF46691D5DE7AA0038BA0A /* LaunchScreen.storyboard */; };
 		340194711D6466D40087976A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3401946A1D6466D40087976A /* Player.swift */; };
@@ -27,6 +26,10 @@
 		340194811D6467310087976A /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 3401947B1D6467310087976A /* yudpsocket.c */; };
 		340194821D6467310087976A /* yudpsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3401947C1D6467310087976A /* yudpsocket.swift */; };
 		340194841D64673A0087976A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340194831D64673A0087976A /* main.swift */; };
+		34604D331D65BA6D00426AEA /* Handling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34604D321D65BA6D00426AEA /* Handling.swift */; };
+		34604D351D65C12B00426AEA /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34604D341D65C12B00426AEA /* JoinVC.swift */; };
+		34C35A571D6702B40072C347 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34C35A561D6702B40072C347 /* Main.storyboard */; };
+		34C35A591D6705DD0072C347 /* WaitingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C35A581D6705DD0072C347 /* WaitingVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,7 +50,6 @@
 		33BF465D1D5DE7AA0038BA0A /* Mafia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mafia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33BF46601D5DE7AA0038BA0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33BF46621D5DE7AA0038BA0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		33BF46651D5DE7AA0038BA0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33BF46671D5DE7AA0038BA0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33BF466A1D5DE7AA0038BA0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33BF466C1D5DE7AA0038BA0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,6 +67,10 @@
 		3401947C1D6467310087976A /* yudpsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yudpsocket.swift; sourceTree = "<group>"; };
 		340194831D64673A0087976A /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		341A75081D64667F00656FF3 /* Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server; sourceTree = BUILT_PRODUCTS_DIR; };
+		34604D321D65BA6D00426AEA /* Handling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handling.swift; sourceTree = "<group>"; };
+		34604D341D65C12B00426AEA /* JoinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
+		34C35A561D6702B40072C347 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		34C35A581D6705DD0072C347 /* WaitingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,8 @@
 		33384CA41D5F383C00A70BDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				34604D321D65BA6D00426AEA /* Handling.swift */,
+				3401946A1D6466D40087976A /* Player.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -95,6 +103,7 @@
 		33384CA51D5F384200A70BDF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				34C35A561D6702B40072C347 /* Main.storyboard */,
 				33384CA21D5F366200A70BDF /* StyledBtn.swift */,
 			);
 			name = View;
@@ -104,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				33BF46621D5DE7AA0038BA0A /* ViewController.swift */,
+				34604D341D65C12B00426AEA /* JoinVC.swift */,
+				34C35A581D6705DD0072C347 /* WaitingVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -143,7 +154,6 @@
 				33384CA51D5F384200A70BDF /* View */,
 				33384CA61D5F384B00A70BDF /* Controller */,
 				33BF46601D5DE7AA0038BA0A /* AppDelegate.swift */,
-				33BF46641D5DE7AA0038BA0A /* Main.storyboard */,
 				33BF46671D5DE7AA0038BA0A /* Assets.xcassets */,
 				33BF46691D5DE7AA0038BA0A /* LaunchScreen.storyboard */,
 				33BF466C1D5DE7AA0038BA0A /* Info.plist */,
@@ -154,7 +164,6 @@
 		340194681D6466C60087976A /* BoilerPlate */ = {
 			isa = PBXGroup;
 			children = (
-				3401946A1D6466D40087976A /* Player.swift */,
 				3401946B1D6466D40087976A /* ysocket.swift */,
 				3401946C1D6466D40087976A /* ytcpsocket.c */,
 				3401946D1D6466D40087976A /* ytcpsocket.swift */,
@@ -235,6 +244,7 @@
 				TargetAttributes = {
 					33BF465C1D5DE7AA0038BA0A = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = F2SW75LBZV;
 					};
 					341A75071D64667F00656FF3 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -265,9 +275,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34C35A571D6702B40072C347 /* Main.storyboard in Resources */,
 				33BF466B1D5DE7AA0038BA0A /* LaunchScreen.storyboard in Resources */,
 				33BF46681D5DE7AA0038BA0A /* Assets.xcassets in Resources */,
-				33BF46661D5DE7AA0038BA0A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,9 +294,12 @@
 				33BF46611D5DE7AA0038BA0A /* AppDelegate.swift in Sources */,
 				340194761D6466D40087976A /* yudpsocket.swift in Sources */,
 				33384CA31D5F366200A70BDF /* StyledBtn.swift in Sources */,
+				34C35A591D6705DD0072C347 /* WaitingVC.swift in Sources */,
 				340194751D6466D40087976A /* yudpsocket.c in Sources */,
 				340194711D6466D40087976A /* Player.swift in Sources */,
+				34604D351D65C12B00426AEA /* JoinVC.swift in Sources */,
 				340194731D6466D40087976A /* ytcpsocket.c in Sources */,
+				34604D331D65BA6D00426AEA /* Handling.swift in Sources */,
 				33384CA11D5F349C00A70BDF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,14 +321,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		33BF46641D5DE7AA0038BA0A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				33BF46651D5DE7AA0038BA0A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		33BF46691D5DE7AA0038BA0A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -415,10 +420,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mafia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Danoosh-Chamani.Mafia";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -428,10 +436,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mafia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Danoosh-Chamani.Mafia";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

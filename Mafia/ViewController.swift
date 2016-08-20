@@ -7,20 +7,25 @@
 //
 
 import UIKit
-import CFNetwork
+
 
 class ViewController: UIViewController {
     
-    var inputstream : NSInputStream!
-    var outputstream : NSOutputStream!
-    
-    
-
     @IBOutlet weak var BC: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
     
         AnimateBc()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
     }
     //For BackGround Animation
     func AnimateBc(){
@@ -35,7 +40,9 @@ class ViewController: UIViewController {
         BC.startAnimating()
     }
     //
-
+    @IBAction func onStartTapped (sender : AnyObject) {
+        performSegueWithIdentifier("JoinVC", sender: nil)
+    }
 
 }
 

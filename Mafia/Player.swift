@@ -9,17 +9,33 @@
 import Foundation
 import Darwin.C
 
+//singleton to handle player
 class Player {
-    private let _client : TCPClient!
-    private var role : String!
+    static let instance = Player(name: "")
+    private var _name : String!
+    private var _role : Int = -1
+    init(name : String){
+        _name = name
+    }
     
-    private var client : TCPClient {
+    var name : String {
         get {
-            return _client
+            return _name
+        }
+        
+        set{
+            _name = newValue
         }
     }
     
-    init (client: TCPClient) {
-        _client = client
+    var role : Int {
+        get {
+            return _role
+        }
+        
+        set {
+           _role = newValue
+        }
     }
+    
 }
