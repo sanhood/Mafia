@@ -12,7 +12,6 @@ class JoinVC: UIViewController {
 
     @IBOutlet weak var nameTextfield: UITextField!
     
-    
     var ConnectionStatus = false
     
     
@@ -58,9 +57,10 @@ class JoinVC: UIViewController {
     
     @IBAction func onJoinedTapped(sender: AnyObject) {
         if let name = nameTextfield.text {
-            Player.instance.name = name
             Handling.instance.send(name)
         }
+        //performSegueWithIdentifier("WaitingVC", sender: nil)
+        
     }
    
    

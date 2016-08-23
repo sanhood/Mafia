@@ -13,7 +13,17 @@ import Darwin.C
 class Player {
     static let instance = Player(name: "")
     private var _name : String!
-    private var _role : Int = -1
+    private var _role : String = ""
+    private var _opponents = [String]()
+    var opponents : [String] {
+        get {
+            return _opponents
+        }
+        
+        set{
+            _opponents = newValue
+        }
+    }
     init(name : String){
         _name = name
     }
@@ -28,7 +38,7 @@ class Player {
         }
     }
     
-    var role : Int {
+    var role : String {
         get {
             return _role
         }

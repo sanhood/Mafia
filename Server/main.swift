@@ -1,29 +1,12 @@
 import Foundation
 import Darwin.C
-
+var n = 1
 var players : [Player] = []
-let server:TCPServer = TCPServer(addr: "192.168.1.107", port: 8080)
-func sendToAll (d : AnyObject) {
-    
-    if (server.gameState == -1 ){
-        let data = d as! [Player]
-    for player1 in data {
-        for player2 in data {
-        if(player1.name != (player2.name)){
-            player1.send((player2.name))
-            }
-        
-        }
-        }}
-}
-        
+let server:TCPServer = TCPServer(addr: "192.168.1.132", port: 8080)
 
 
 
 
-func send(client:TCPClient , d : [UInt8]) {
-    client.send(data: d)
-}
 func setUpServer() -> Bool {
     
     let (success,_) = server.listen()
@@ -38,20 +21,25 @@ func receive (player : Player) -> String {
 }
 
 func acceptPlayer ( ) {
-    for x in 0...1 {
+    var counter = 0
+    while counter < n {
         let client = server.accept()
         let name = client!.read(1024*10)
         let newPlayer = Player(client: client! , name: name!)
         players.append(newPlayer)
-        if (x == 0) {
-            firstPlayerJoins() }
-        else {
-            waitingForPlayersToJoin()
+        for player1 in players {
+            for player2 in players {
+                // sleep(1)
+                if(player1.name != (player2.name)){
+                    player1.send((player2.name))
+                    usleep(10000)
+                }
+            }
         }
-        sendToAll(players)
+        counter++
          }
-    
-
+        sleep(1)
+        print("server closed")
 }
 
 
@@ -63,24 +51,69 @@ func processData (d : String) {
 }
 
 
-func firstPlayerJoins () {
-    server.gameState = -2
-    print(#function)
+func assignRoles ( ) {
+    players[0].role = "police"
+    players[0].send("police")
+   // players[1].role = "mafia"
+   // players[1].send("mafia")
+   // players[2].role = "mafia"
+   // players[2].send("mafia")
+    print("sent")
 }
 
-func waitingForPlayersToJoin () {
-    server.gameState = -1
-    print(#function)
+func displayMafiaToMafia () {
+    for player1 in players {
+        if player1.role == "mafia" {
+            for player2 in players {
+                if player2.role == "mafia" && player2.name != player1.name{
+                    player1.send(player2.name)
+                    usleep(100000)
+
+            }
+        }
+    }
+}
 }
 
-
-
+func sendToAll (d : String) {
+    for player in players {
+        player.send(d)
+    }
+}
+func game(){
+    let delayInSeconds = 8.0
+    
+    let GlobalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    
+        for player in players {
+             sendToAll("vote")
+             sendToAll(player.name)
+            dispatch_async(GlobalQueue){
+                for player in players {
+                    player.recieve()
+                    sendToAll(player.recievedContent)
+                }
+            }
+            sleep(8)
+            
+    }
+    
+}
 
 
 
 
 setUpServer()
 acceptPlayer()
+assignRoles()
+displayMafiaToMafia()
+sleep(5)
+sendToAll("dayone")
+game()
+
+
+
+
 let stdinput=NSFileHandle.fileHandleWithStandardInput()
 stdinput.readDataToEndOfFile()
 

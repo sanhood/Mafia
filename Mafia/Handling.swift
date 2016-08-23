@@ -12,6 +12,17 @@ class Handling {
     static let instance = Handling()
     private let client : TCPClient!
     private var _receivedContent : String = ""
+    private var _gameState : Int = -2
+    var gameState : Int {
+        get {
+            return _gameState
+        }
+        
+        set {
+            _gameState = newValue
+        }
+    }
+
     var receivedContent : String {
         get {
             return _receivedContent
@@ -22,12 +33,12 @@ class Handling {
         }
     }
     init(){
-        client = TCPClient(addr: "192.168.1.107", port: 8080)
+        client = TCPClient(addr: "192.168.1.132", port: 8080)
     }
     
-    func send (d : AnyObject) {
+    func send (d : String) {
         
-        client.send(data: convertToUInt8(d))
+        client.send(data :convertToUInt8(d))
     }
     
 //receives continuously from server in a thread and handles the receivced data in main thread
@@ -38,8 +49,40 @@ class Handling {
             if let receivedContent = Handling.instance.client.read(1024*10) {
                 print(self.convertToString(receivedContent))
             dispatch_async(dispatch_get_main_queue()) {
-            self.receivedContent = self.convertToString(receivedContent)
-        NSNotificationCenter.defaultCenter().postNotificationName("updateView", object: nil)
+                if Handling.instance.gameState == -1 {
+                    self.receivedContent = self.convertToString(receivedContent)
+                    if !Player.instance.opponents.contains(self.receivedContent){
+                        Player.instance.opponents.append(self.receivedContent)}
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateView", object: nil)
+               }
+                
+                else if Handling.instance.gameState == 0 {
+                    self.receivedContent = self.convertToString(receivedContent)
+                    NSNotificationCenter.defaultCenter().postNotificationName("setRole", object: nil)
+                    Handling.instance.gameState = 1
+                }
+                
+                else if self.convertToString(receivedContent) == "dayone" {
+                    NSNotificationCenter.defaultCenter().postNotificationName("dayOne", object: nil)
+                    Handling.instance.gameState == 2
+                    
+                }
+                else if Handling.instance.gameState == 1 && Player.instance.role == "mafia"{
+                    self.receivedContent = self.convertToString(receivedContent)
+                    NSNotificationCenter.defaultCenter().postNotificationName("mafias", object: nil)
+                }
+                
+                else if Handling.instance.gameState == 2 && self.convertToString(receivedContent) == "vote" {
+                    NSNotificationCenter.defaultCenter().postNotificationName("label", object: nil)
+                    sleep(1)
+                    NSNotificationCenter.defaultCenter().postNotificationName("table", object: nil)
+                }
+                
+                
+                
+                
+               
+        
 
                 }}}
         }

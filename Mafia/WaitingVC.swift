@@ -2,17 +2,15 @@
 //  WaitingVC.swift
 //  Mafia
 //
-//  Created by Soroush Shahi on 8/19/16.
+//  Created by Soroush Shahi on 8/21/16.
 //  Copyright © 2016 Danoosh Chamani. All rights reserved.
 //
 
 import UIKit
 
-class WaitingVC: UIViewController {
-    @IBOutlet weak var label1 : UILabel!
-    @IBOutlet weak var label2 : UILabel!
-    
-    
+class WaitingVC: UIViewController , UITableViewDataSource {
+    @IBOutlet var tableView:UITableView!
+    @IBOutlet var startBtn: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -24,39 +22,61 @@ class WaitingVC: UIViewController {
         super.viewWillDisappear(animated)
         
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        label1.text = Player.instance.name
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        startBtn.enabled = false
         Handling.instance.receive()
+        Handling.instance.gameState = -1
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateView:", name: "updateView", object: nil)
+        Player.instance.opponents.append(Player.instance.name)
     }
     
-    
-    
-    
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Table view data source
+    
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return Player.instance.opponents.count
+    }
     
     func updateView (notification: NSNotification) {
-        if (Handling.instance.receivedContent != Player.instance.name){
-            label2.text = Handling.instance.receivedContent}
+        tableView.reloadData()
+        if Player.instance.opponents.count == 3 {
+            startBtn.enabled = true
+            Handling.instance.gameState = 0
+            performSegueWithIdentifier("roleVC", sender: nil)
+        }
+    }
+    
+    
+    
+    
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlayerCell", forIndexPath: indexPath)
+        // Configure the cell...
+        cell.textLabel?.text = Player.instance.opponents[indexPath.row]
+        
+        return cell
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func onStartTapped (sender : AnyObject) {
+        
     }
-    */
+
 
 }

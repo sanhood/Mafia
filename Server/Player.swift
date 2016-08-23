@@ -11,12 +11,34 @@ import Darwin.C
 
 class Player {
     private let _client : TCPClient!
-    private var role : String!
+    private var _role : String!
     private let _name : String!
-    
-    private var client : TCPClient {
+    private var _recievedContent: String! = ""
+    let GlobalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    var client : TCPClient {
         get {
             return _client
+        }
+        
+        
+    }
+    
+    var recievedContent : String {
+        get {
+            return _recievedContent
+        }
+        
+        set {
+            _recievedContent = newValue
+        }
+    }
+    
+    var role : String {
+        get {
+            return _role
+        }
+        set {
+            _role = newValue
         }
     }
     
@@ -33,6 +55,13 @@ class Player {
     
     func send (d : String) {
         client.send(str: d)
+
+    }
+    
+    func recieve () {
+        dispatch_async(GlobalQueue){
+            self.recievedContent = self.convertToString(self.client.read(1024*10)!)
+        }
     }
     
     func read () -> String {

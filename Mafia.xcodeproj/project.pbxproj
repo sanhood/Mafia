@@ -28,8 +28,10 @@
 		340194841D64673A0087976A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340194831D64673A0087976A /* main.swift */; };
 		34604D331D65BA6D00426AEA /* Handling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34604D321D65BA6D00426AEA /* Handling.swift */; };
 		34604D351D65C12B00426AEA /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34604D341D65C12B00426AEA /* JoinVC.swift */; };
+		3475AEFE1D6A21680066F0A2 /* RoleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3475AEFD1D6A21680066F0A2 /* RoleVC.swift */; };
 		34C35A571D6702B40072C347 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34C35A561D6702B40072C347 /* Main.storyboard */; };
-		34C35A591D6705DD0072C347 /* WaitingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C35A581D6705DD0072C347 /* WaitingVC.swift */; };
+		34F69EA31D6B11510098018C /* VoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F69EA21D6B11510098018C /* VoteVC.swift */; };
+		34FB31A81D69D15200CDA95E /* WaitingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FB31A71D69D15200CDA95E /* WaitingVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,8 +71,10 @@
 		341A75081D64667F00656FF3 /* Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server; sourceTree = BUILT_PRODUCTS_DIR; };
 		34604D321D65BA6D00426AEA /* Handling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handling.swift; sourceTree = "<group>"; };
 		34604D341D65C12B00426AEA /* JoinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
+		3475AEFD1D6A21680066F0A2 /* RoleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleVC.swift; sourceTree = "<group>"; };
 		34C35A561D6702B40072C347 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		34C35A581D6705DD0072C347 /* WaitingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingVC.swift; sourceTree = "<group>"; };
+		34F69EA21D6B11510098018C /* VoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteVC.swift; sourceTree = "<group>"; };
+		34FB31A71D69D15200CDA95E /* WaitingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +118,9 @@
 			children = (
 				33BF46621D5DE7AA0038BA0A /* ViewController.swift */,
 				34604D341D65C12B00426AEA /* JoinVC.swift */,
-				34C35A581D6705DD0072C347 /* WaitingVC.swift */,
+				34FB31A71D69D15200CDA95E /* WaitingVC.swift */,
+				3475AEFD1D6A21680066F0A2 /* RoleVC.swift */,
+				34F69EA21D6B11510098018C /* VoteVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -288,16 +294,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3475AEFE1D6A21680066F0A2 /* RoleVC.swift in Sources */,
 				33BF46631D5DE7AA0038BA0A /* ViewController.swift in Sources */,
 				340194721D6466D40087976A /* ysocket.swift in Sources */,
 				340194741D6466D40087976A /* ytcpsocket.swift in Sources */,
 				33BF46611D5DE7AA0038BA0A /* AppDelegate.swift in Sources */,
 				340194761D6466D40087976A /* yudpsocket.swift in Sources */,
 				33384CA31D5F366200A70BDF /* StyledBtn.swift in Sources */,
-				34C35A591D6705DD0072C347 /* WaitingVC.swift in Sources */,
+				34FB31A81D69D15200CDA95E /* WaitingVC.swift in Sources */,
 				340194751D6466D40087976A /* yudpsocket.c in Sources */,
 				340194711D6466D40087976A /* Player.swift in Sources */,
 				34604D351D65C12B00426AEA /* JoinVC.swift in Sources */,
+				34F69EA31D6B11510098018C /* VoteVC.swift in Sources */,
 				340194731D6466D40087976A /* ytcpsocket.c in Sources */,
 				34604D331D65BA6D00426AEA /* Handling.swift in Sources */,
 				33384CA11D5F349C00A70BDF /* Constants.swift in Sources */,
