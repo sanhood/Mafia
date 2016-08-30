@@ -30,7 +30,7 @@
 		34604D351D65C12B00426AEA /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34604D341D65C12B00426AEA /* JoinVC.swift */; };
 		3475AEFE1D6A21680066F0A2 /* RoleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3475AEFD1D6A21680066F0A2 /* RoleVC.swift */; };
 		34C35A571D6702B40072C347 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34C35A561D6702B40072C347 /* Main.storyboard */; };
-		34F69EA31D6B11510098018C /* VoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F69EA21D6B11510098018C /* VoteVC.swift */; };
+		34F69EA31D6B11510098018C /* DayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F69EA21D6B11510098018C /* DayVC.swift */; };
 		34FB31A81D69D15200CDA95E /* WaitingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FB31A71D69D15200CDA95E /* WaitingVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +73,7 @@
 		34604D341D65C12B00426AEA /* JoinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		3475AEFD1D6A21680066F0A2 /* RoleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleVC.swift; sourceTree = "<group>"; };
 		34C35A561D6702B40072C347 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		34F69EA21D6B11510098018C /* VoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteVC.swift; sourceTree = "<group>"; };
+		34F69EA21D6B11510098018C /* DayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayVC.swift; sourceTree = "<group>"; };
 		34FB31A71D69D15200CDA95E /* WaitingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,7 +120,7 @@
 				34604D341D65C12B00426AEA /* JoinVC.swift */,
 				34FB31A71D69D15200CDA95E /* WaitingVC.swift */,
 				3475AEFD1D6A21680066F0A2 /* RoleVC.swift */,
-				34F69EA21D6B11510098018C /* VoteVC.swift */,
+				34F69EA21D6B11510098018C /* DayVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -305,7 +305,7 @@
 				340194751D6466D40087976A /* yudpsocket.c in Sources */,
 				340194711D6466D40087976A /* Player.swift in Sources */,
 				34604D351D65C12B00426AEA /* JoinVC.swift in Sources */,
-				34F69EA31D6B11510098018C /* VoteVC.swift in Sources */,
+				34F69EA31D6B11510098018C /* DayVC.swift in Sources */,
 				340194731D6466D40087976A /* ytcpsocket.c in Sources */,
 				34604D331D65BA6D00426AEA /* Handling.swift in Sources */,
 				33384CA11D5F349C00A70BDF /* Constants.swift in Sources */,

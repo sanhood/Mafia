@@ -33,7 +33,7 @@ class Handling {
         }
     }
     init(){
-        client = TCPClient(addr: "192.168.1.132", port: 8080)
+        client = TCPClient(addr: "192.168.1.105", port: 8080)
     }
     
     func send (d : String) {
@@ -48,35 +48,56 @@ class Handling {
             while true{
             if let receivedContent = Handling.instance.client.read(1024*10) {
                 print(self.convertToString(receivedContent))
-            dispatch_async(dispatch_get_main_queue()) {
-                if Handling.instance.gameState == -1 {
+                if self.convertToString(receivedContent) == "rolevc" {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSNotificationCenter.defaultCenter().postNotificationName("roleVC", object: nil)}
+                }
+                
+
+                else if Handling.instance.gameState == -1 {
                     self.receivedContent = self.convertToString(receivedContent)
                     if !Player.instance.opponents.contains(self.receivedContent){
                         Player.instance.opponents.append(self.receivedContent)}
-                    NSNotificationCenter.defaultCenter().postNotificationName("updateView", object: nil)
+                    dispatch_async(dispatch_get_main_queue()) {
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateView", object: nil)}
                }
-                
-                else if Handling.instance.gameState == 0 {
+                    
+                    else if Handling.instance.gameState == 0 {
                     self.receivedContent = self.convertToString(receivedContent)
-                    NSNotificationCenter.defaultCenter().postNotificationName("setRole", object: nil)
+                    dispatch_async(dispatch_get_main_queue()) {
+                    NSNotificationCenter.defaultCenter().postNotificationName("setRole", object: nil)}
                     Handling.instance.gameState = 1
                 }
+                    
+                
                 
                 else if self.convertToString(receivedContent) == "dayone" {
-                    NSNotificationCenter.defaultCenter().postNotificationName("dayOne", object: nil)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSNotificationCenter.defaultCenter().postNotificationName("dayOne", object: nil)}
                     Handling.instance.gameState == 2
                     
                 }
                 else if Handling.instance.gameState == 1 && Player.instance.role == "mafia"{
                     self.receivedContent = self.convertToString(receivedContent)
-                    NSNotificationCenter.defaultCenter().postNotificationName("mafias", object: nil)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSNotificationCenter.defaultCenter().postNotificationName("mafias", object: nil)}
                 }
                 
-                else if Handling.instance.gameState == 2 && self.convertToString(receivedContent) == "vote" {
+                else if Handling.instance.gameState == 2 && self.convertToString(receivedContent).containsString("vote") {
+                    self.receivedContent = (self.convertToString(receivedContent)).stringByReplacingOccurrencesOfString("vote", withString: "")
+                    dispatch_async(dispatch_get_main_queue()) {
                     NSNotificationCenter.defaultCenter().postNotificationName("label", object: nil)
-                    sleep(1)
-                    NSNotificationCenter.defaultCenter().postNotificationName("table", object: nil)
+                        }
+                    
                 }
+                
+                else {
+                    self.receivedContent = self.convertToString(receivedContent)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSNotificationCenter.defaultCenter().postNotificationName("table", object: nil)}
+                }
+                
+                
                 
                 
                 
@@ -84,7 +105,7 @@ class Handling {
                
         
 
-                }}}
+                }}
         }
         
 }

@@ -1,9 +1,10 @@
 import Foundation
 import Darwin.C
-var n = 1
-var players : [Player] = []
-let server:TCPServer = TCPServer(addr: "192.168.1.132", port: 8080)
 
+var n = 3
+var players : [Player] = []
+let server:TCPServer = TCPServer(addr: "192.168.1.105", port: 8080)
+var tof = true
 
 
 
@@ -29,7 +30,6 @@ func acceptPlayer ( ) {
         players.append(newPlayer)
         for player1 in players {
             for player2 in players {
-                // sleep(1)
                 if(player1.name != (player2.name)){
                     player1.send((player2.name))
                     usleep(10000)
@@ -38,8 +38,8 @@ func acceptPlayer ( ) {
         }
         counter++
          }
-        sleep(1)
-        print("server closed")
+        sleep(3)
+        sendToAll("rolevc")
 }
 
 
@@ -54,11 +54,10 @@ func processData (d : String) {
 func assignRoles ( ) {
     players[0].role = "police"
     players[0].send("police")
-   // players[1].role = "mafia"
-   // players[1].send("mafia")
-   // players[2].role = "mafia"
-   // players[2].send("mafia")
-    print("sent")
+    players[1].role = "mafia"
+    players[1].send("mafia")
+    players[2].role = "mafia"
+    players[2].send("mafia")
 }
 
 func displayMafiaToMafia () {
@@ -80,24 +79,41 @@ func sendToAll (d : String) {
         player.send(d)
     }
 }
+
+func eliminatePlayer () {
+    var max = 0
+    var index : Int?
+    for x in 0...players.count - 1 {
+        if players[x].numberOfVotes > max {
+            max = players[x].numberOfVotes
+            index = x
+        }
+    }
+    if let ind = index {
+        players.removeAtIndex(ind)
+        }
+}
+
+
 func game(){
-    let delayInSeconds = 8.0
-    
-    let GlobalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-    
-        for player in players {
-             sendToAll("vote")
-             sendToAll(player.name)
-            dispatch_async(GlobalQueue){
-                for player in players {
-                    player.recieve()
-                    sendToAll(player.recievedContent)
-                }
-            }
-            sleep(8)
+    for player in players {
+        player.recieve()
+    }
+       for player in players {
+            sendToAll("vote"+player.name)
+            player.isVoting = true
+            sleep(15)
+            player.isVoting = false
             
     }
+    tof = false
     
+    for player in players {
+        print(player.name + "\(player.numberOfVotes)")
+    }
+    
+    eliminatePlayer()
+
 }
 
 
@@ -105,15 +121,19 @@ func game(){
 
 setUpServer()
 acceptPlayer()
+sleep(3)
 assignRoles()
+sleep(1)
 displayMafiaToMafia()
-sleep(5)
+sleep(10)
 sendToAll("dayone")
+sleep(2)
 game()
 
 
 
 
+
 let stdinput=NSFileHandle.fileHandleWithStandardInput()
-stdinput.readDataToEndOfFile()
+    stdinput.readDataToEndOfFile()
 

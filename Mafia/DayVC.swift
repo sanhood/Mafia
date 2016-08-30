@@ -11,16 +11,31 @@ import UIKit
 class VoteVC: UIViewController , UITableViewDataSource {
     @IBOutlet weak var playerLbl : UILabel!
     @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var voteBtn : UIButton!
     
     var names : [String] = []
 
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        voteBtn.enabled = false
         Handling.instance.receive()
         Handling.instance.gameState = 2
         // Do any additional setup after loading the view.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateTable:", name: "table", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateLabel:", name: "label", object: nil)
+        tableView.dataSource = self
+        
         
     }
 
@@ -33,16 +48,36 @@ class VoteVC: UIViewController , UITableViewDataSource {
     
     @IBAction func onVoteTapped (sender : AnyObject) {
         Handling.instance.send(Player.instance.name)
+       // if voteBtn.currentTitle == "vote" {
+        //    voteBtn.setTitle("unvote", forState: UIControlState.Normal) }
+       // else {
+        //    voteBtn.setTitle("vote", forState: UIControlState.Normal)
+
+       // }
+        
+       // usleep(100000)
+        voteBtn.enabled = false
     }
     
     
     func updateLabel (notification : NSNotification) {
+        voteBtn.enabled = true
+       // voteBtn.setTitle("vote", forState: UIControlState.Normal)
+        names = []
+        tableView.reloadData()
         playerLbl.text = Handling.instance.receivedContent
+        
+        
     }
 
     func updateTable (notification : NSNotification) {
+        if names.contains(Handling.instance.receivedContent) {
+            names = names.filter() { $0 != Handling.instance.receivedContent }
+            tableView.reloadData()
+        }
+        else {
         names.append(Handling.instance.receivedContent)
-        tableView.reloadData()
+            tableView.reloadData() }
     }
     
     

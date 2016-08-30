@@ -17,9 +17,11 @@ class RoleVC: UIViewController, UITableViewDataSource {
         super.viewWillAppear(animated)
     }
     
+    
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
+        Handling.instance.gameState = 2
         
     }
 
@@ -41,12 +43,11 @@ class RoleVC: UIViewController, UITableViewDataSource {
     func updateRoleLbl (notification : NSNotification) {
         roleLbl.text = Handling.instance.receivedContent
         Player.instance.role = roleLbl.text!
-        print(Player.instance.role)
         Handling.instance.gameState = 1
     }
     
     func goToDayOne (notification : NSNotification) {
-        performSegueWithIdentifier("dayOne", sender: nil)
+        performSegueWithIdentifier("DayVC", sender: nil)
     }
     
     

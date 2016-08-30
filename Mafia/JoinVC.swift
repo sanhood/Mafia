@@ -58,6 +58,7 @@ class JoinVC: UIViewController {
     @IBAction func onJoinedTapped(sender: AnyObject) {
         if let name = nameTextfield.text {
             Handling.instance.send(name)
+            Player.instance.name = name
         }
         //performSegueWithIdentifier("WaitingVC", sender: nil)
         

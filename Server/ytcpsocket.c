@@ -114,8 +114,9 @@ int ytcpsocket_pull(int socketfd,char *data,int len,int timeout_sec){
 }
 int ytcpsocket_send(int socketfd,const char *data,int len){
     int byteswrite=0;
+    int writelen=0;
     while (len-byteswrite>0) {
-        int writelen=(int)write(socketfd, data+byteswrite, len-byteswrite);
+        writelen=(int)write(socketfd, data+byteswrite, len-byteswrite);
         if (writelen<0) {
             return -1;
         }

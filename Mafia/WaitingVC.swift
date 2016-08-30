@@ -10,7 +10,6 @@ import UIKit
 
 class WaitingVC: UIViewController , UITableViewDataSource {
     @IBOutlet var tableView:UITableView!
-    @IBOutlet var startBtn: UIButton!
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -30,10 +29,10 @@ class WaitingVC: UIViewController , UITableViewDataSource {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        startBtn.enabled = false
         Handling.instance.receive()
         Handling.instance.gameState = -1
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateView:", name: "updateView", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "roleVC:", name: "roleVC", object: nil)
         Player.instance.opponents.append(Player.instance.name)
     }
     
@@ -56,11 +55,11 @@ class WaitingVC: UIViewController , UITableViewDataSource {
     
     func updateView (notification: NSNotification) {
         tableView.reloadData()
-        if Player.instance.opponents.count == 3 {
-            startBtn.enabled = true
-            Handling.instance.gameState = 0
-            performSegueWithIdentifier("roleVC", sender: nil)
-        }
+        
+    }
+    
+    func roleVC (notification : NSNotification) {
+        performSegueWithIdentifier("roleVC", sender: nil)
     }
     
     
