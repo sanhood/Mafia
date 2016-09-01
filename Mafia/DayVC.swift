@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VoteVC: UIViewController , UITableViewDataSource {
+class DayVC: UIViewController , UITableViewDataSource {
     @IBOutlet weak var playerLbl : UILabel!
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var voteBtn : UIButton!
@@ -16,16 +16,6 @@ class VoteVC: UIViewController , UITableViewDataSource {
     var names : [String] = []
 
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        super.viewWillAppear(animated)
-    }
-    
-    
-    override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        super.viewWillDisappear(animated)        
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         voteBtn.enabled = false
@@ -34,9 +24,18 @@ class VoteVC: UIViewController , UITableViewDataSource {
         // Do any additional setup after loading the view.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateTable:", name: "table", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateLabel:", name: "label", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToResultVC:", name: "resultVC", object: nil)
+        if Player.instance.isEliminated {
+            voteBtn.enabled = false
+        }
         tableView.dataSource = self
         
         
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        Handling.instance.gameState = 4
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,10 +43,15 @@ class VoteVC: UIViewController , UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
+    func goToResultVC (notification: NSNotification) {
+        performSegueWithIdentifier("ResultVC", sender: nil)
+    }
+    
     
     
     @IBAction func onVoteTapped (sender : AnyObject) {
-        Handling.instance.send(Player.instance.name)
+        
+        Handling.instance.send("general"+Player.instance.name)
        // if voteBtn.currentTitle == "vote" {
         //    voteBtn.setTitle("unvote", forState: UIControlState.Normal) }
        // else {
@@ -61,11 +65,13 @@ class VoteVC: UIViewController , UITableViewDataSource {
     
     
     func updateLabel (notification : NSNotification) {
-        voteBtn.enabled = true
+        if !Player.instance.isEliminated {
+            voteBtn.enabled = true }
        // voteBtn.setTitle("vote", forState: UIControlState.Normal)
         names = []
         tableView.reloadData()
         playerLbl.text = Handling.instance.receivedContent
+        Handling.instance.gameState = 3
         
         
     }

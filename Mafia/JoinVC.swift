@@ -18,10 +18,8 @@ class JoinVC: UIViewController {
     override func viewDidAppear (animated : Bool) {
         if Handling.instance.connect() {
             ConnectionStatus = true
-            self.title = "Connected"
         }
         else {
-            self.title = "Disconnected"
             let alert = UIAlertController(title: "ERROR", message: "Cannot Connect To Server", preferredStyle: .Alert)
             let action = UIAlertAction(title: "Retry", style: .Default, handler : retryConnecting)
             alert.addAction(action)

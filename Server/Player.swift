@@ -13,10 +13,23 @@ class Player {
     private let _client : TCPClient!
     private var _role : String!
     private let _name : String!
-    private var _recievedContent: String! = ""
+    private var _receivedContent: String! = ""
     private var _hasVoted = false
     private var _numberOfVotes = 0
     private var _isVoting = false
+    private var _isElimanted = false
+    
+    
+    var isEliminated : Bool {
+        get {
+            return _isElimanted
+        }
+        
+        set {
+            _isElimanted = newValue
+        }
+    }
+
     
     var isVoting : Bool {
         get{
@@ -28,15 +41,15 @@ class Player {
         }
     }
     
-    var hasVoted : Bool {
-        get{
-            return _hasVoted
-        }
-        
-        set {
-            _hasVoted = newValue
-        }
-    }
+//    var hasVoted : Bool {
+//        get{
+//            return _hasVoted
+//        }
+//        
+//        set {
+//            _hasVoted = newValue
+//        }
+//    }
 
     
     var numberOfVotes : Int {
@@ -56,13 +69,13 @@ class Player {
         
     }
     
-    var recievedContent : String {
+    var receivedContent : String {
         get {
-            return _recievedContent
+            return _receivedContent
         }
         
         set {
-            _recievedContent = newValue
+            _receivedContent = newValue
         }
     }
     
@@ -91,14 +104,25 @@ class Player {
 
     }
     
-    func recieve () {
+    func receive () {
         let GlobalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         dispatch_async(GlobalQueue){
             while tof {
-            if let recievedContent = self.client.read(1024*10) {
-                self.recievedContent = self.convertToString(recievedContent)
-               // print(self.recievedContent)
-                sendToAll(self.recievedContent)
+            if let receivedContent = self.client.read(1024*10) {
+                if self.convertToString(receivedContent) == "mafiaVote" {
+                    for player in players {
+                        if player.isVoting == true {
+                            player.numberOfVotes++
+                            print(player.name + "++")
+                        }
+                    }
+
+                }
+                
+                else if self.convertToString(receivedContent).containsString("general"){
+                self.receivedContent = (self.convertToString(receivedContent)).stringByReplacingOccurrencesOfString("general", withString: "")
+               // print(self.receivedContent)
+                sendToAll(self.receivedContent)
                 for player in players {
                     if player.isVoting == true {
                             player.numberOfVotes++
@@ -108,7 +132,7 @@ class Player {
             }
             
         }
-    }
+            }}
     }
     
     func read () -> String {

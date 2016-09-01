@@ -15,6 +15,16 @@ class Player {
     private var _name : String!
     private var _role : String = ""
     private var _opponents = [String]()
+    private var _isElimanted = false
+    var isEliminated : Bool {
+        get {
+            return _isElimanted
+        }
+        
+        set {
+            _isElimanted = newValue
+        }
+    }
     var opponents : [String] {
         get {
             return _opponents

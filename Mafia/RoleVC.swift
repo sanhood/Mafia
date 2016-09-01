@@ -12,14 +12,7 @@ class RoleVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var roleLbl : UILabel!
     @IBOutlet var tableView:UITableView!
     var mafias : [String] = []
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        super.viewWillAppear(animated)
-    }
-    
-    
     override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
         Handling.instance.gameState = 2
         
@@ -32,7 +25,7 @@ class RoleVC: UIViewController, UITableViewDataSource {
         Handling.instance.receive()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRoleLbl:", name: "setRole", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateTable:", name: "mafias", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToDayOne:", name: "dayOne", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToDay:", name: "day", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +39,7 @@ class RoleVC: UIViewController, UITableViewDataSource {
         Handling.instance.gameState = 1
     }
     
-    func goToDayOne (notification : NSNotification) {
+    func goToDay (notification : NSNotification) {
         performSegueWithIdentifier("DayVC", sender: nil)
     }
     

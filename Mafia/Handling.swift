@@ -48,9 +48,14 @@ class Handling {
             while true{
             if let receivedContent = Handling.instance.client.read(1024*10) {
                 print(self.convertToString(receivedContent))
-                if self.convertToString(receivedContent) == "rolevc" {
+                if self.convertToString(receivedContent) == "eliminated" {
                     dispatch_async(dispatch_get_main_queue()) {
-                        NSNotificationCenter.defaultCenter().postNotificationName("roleVC", object: nil)}
+                NSNotificationCenter.defaultCenter().postNotificationName("eliminated", object: nil)}
+                }
+                
+                else if self.convertToString(receivedContent) == "rolevc" {
+                    dispatch_async(dispatch_get_main_queue()) {
+                    NSNotificationCenter.defaultCenter().postNotificationName("roleVC", object: nil)}
                 }
                 
 
@@ -71,11 +76,22 @@ class Handling {
                     
                 
                 
-                else if self.convertToString(receivedContent) == "dayone" {
+                else if self.convertToString(receivedContent) == "day" {
                     dispatch_async(dispatch_get_main_queue()) {
-                        NSNotificationCenter.defaultCenter().postNotificationName("dayOne", object: nil)}
+                    NSNotificationCenter.defaultCenter().postNotificationName("day", object: nil)}
                     Handling.instance.gameState == 2
                     
+                }
+                
+                else if self.convertToString(receivedContent) == "night" {
+                    dispatch_async(dispatch_get_main_queue()) {
+                    NSNotificationCenter.defaultCenter().postNotificationName("night", object: nil)}
+                    Handling.instance.gameState == 5
+                    
+                }
+                else if self.convertToString(receivedContent) == "result" {
+                    dispatch_async(dispatch_get_main_queue()) {
+                    NSNotificationCenter.defaultCenter().postNotificationName("resultVC", object: nil)}
                 }
                 else if Handling.instance.gameState == 1 && Player.instance.role == "mafia"{
                     self.receivedContent = self.convertToString(receivedContent)
@@ -83,18 +99,25 @@ class Handling {
                         NSNotificationCenter.defaultCenter().postNotificationName("mafias", object: nil)}
                 }
                 
-                else if Handling.instance.gameState == 2 && self.convertToString(receivedContent).containsString("vote") {
+                else if self.convertToString(receivedContent).containsString("vote") {
                     self.receivedContent = (self.convertToString(receivedContent)).stringByReplacingOccurrencesOfString("vote", withString: "")
                     dispatch_async(dispatch_get_main_queue()) {
                     NSNotificationCenter.defaultCenter().postNotificationName("label", object: nil)
                         }
                     
                 }
-                
-                else {
+                else if Handling.instance.gameState == 3 {
                     self.receivedContent = self.convertToString(receivedContent)
                     dispatch_async(dispatch_get_main_queue()) {
-                        NSNotificationCenter.defaultCenter().postNotificationName("table", object: nil)}
+                    NSNotificationCenter.defaultCenter().postNotificationName("table", object: nil)}
+                }
+                
+                
+                
+                else if Handling.instance.gameState == 4 {
+                    self.receivedContent = self.convertToString(receivedContent)
+                    dispatch_async(dispatch_get_main_queue()) {
+                    NSNotificationCenter.defaultCenter().postNotificationName("result", object: nil)}
                 }
                 
                 

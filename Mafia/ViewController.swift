@@ -18,15 +18,7 @@ class ViewController: UIViewController {
         AnimateBc()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        super.viewWillAppear(animated)
-    }
     
-    override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        super.viewWillDisappear(animated)
-    }
     //For BackGround Animation
     func AnimateBc(){
         var Backarray = [UIImage]()

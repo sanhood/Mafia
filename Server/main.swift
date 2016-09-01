@@ -52,10 +52,10 @@ func processData (d : String) {
 
 
 func assignRoles ( ) {
-    players[0].role = "police"
-    players[0].send("police")
-    players[1].role = "mafia"
-    players[1].send("mafia")
+    players[0].role = "mafia"
+    players[0].send("mafia")
+    players[1].role = "police"
+    players[1].send("police")
     players[2].role = "mafia"
     players[2].send("mafia")
 }
@@ -81,6 +81,8 @@ func sendToAll (d : String) {
 }
 
 func eliminatePlayer () {
+    sendToAll("result")
+    sleep(2)
     var max = 0
     var index : Int?
     for x in 0...players.count - 1 {
@@ -88,33 +90,87 @@ func eliminatePlayer () {
             max = players[x].numberOfVotes
             index = x
         }
+        players[x].numberOfVotes = 0
     }
+    
     if let ind = index {
-        players.removeAtIndex(ind)
+        players[ind].send("eliminated")
+        usleep(300000)
+        sendToAll(players[ind].name)
+        players[ind].isEliminated = true
         }
+    
+}
+
+func gameOver () -> Bool {
+    return false
+}
+
+func sendToAliveMafias (d : String) {
+    for player in players {
+        if player.isEliminated == false && player.role == "mafia" {
+            player.send(d)
+        }
+    }
+}
+
+func day () {
+    sendToAll("day")
+    sleep(2)
+    tof = true
+    for player in players {
+        if player.isEliminated == false {
+            player.receive() }
+    }
+    for player in players {
+        sendToAll("vote"+player.name)
+        player.isVoting = true
+        sleep(5)
+        player.isVoting = false
+        
+    }
+    tof = false
+}
+
+func night () {
+    sendToAll("night")
+    sleep(2)
+    tof = true
+    for player in players {
+        if player.isEliminated == false && player.role == "mafia" {
+            player.receive()
+        }}
+    for player in players {
+        if player.isEliminated == false {
+            sendToAliveMafias("vote"+player.name)
+            player.isVoting = true
+            sleep(5)
+            player.isVoting = false}
+        
+    }
+    tof = false
 }
 
 
 func game(){
-    for player in players {
-        player.recieve()
-    }
-       for player in players {
-            sendToAll("vote"+player.name)
-            player.isVoting = true
-            sleep(15)
-            player.isVoting = false
-            
-    }
-    tof = false
-    
-    for player in players {
-        print(player.name + "\(player.numberOfVotes)")
-    }
-    
+   // while !gameOver() {
+    day()
     eliminatePlayer()
+    sleep(5)
+    night()
+    eliminatePlayer()
+    sleep(5)
+    day()
+    }
+    
+    
+    
+    
+    
+    
+  //  }
 
-}
+
 
 
 
@@ -126,8 +182,6 @@ assignRoles()
 sleep(1)
 displayMafiaToMafia()
 sleep(10)
-sendToAll("dayone")
-sleep(2)
 game()
 
 
